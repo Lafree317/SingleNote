@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="NewFooterView" customModule="HandNote" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSN-1h-t8v">
+                    <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="s3m-W6-9kb"/>
+                    </constraints>
+                    <state key="normal" title="新建一个"/>
+                    <connections>
+                        <action selector="newModelAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="ifO-mI-gjz"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yzg-Vf-62A">
+                    <rect key="frame" x="275" y="0.0" width="100" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="FkB-py-gPx"/>
+                    </constraints>
+                    <state key="normal" title="模板创建"/>
+                    <connections>
+                        <action selector="HistroyCreatAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ea5-Oc-td5"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="pSN-1h-t8v" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BZ6-kq-Qk8"/>
+                <constraint firstItem="pSN-1h-t8v" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HVH-4S-i6n"/>
+                <constraint firstAttribute="trailing" secondItem="yzg-Vf-62A" secondAttribute="trailing" id="J6F-RZ-QeK"/>
+                <constraint firstAttribute="bottom" secondItem="pSN-1h-t8v" secondAttribute="bottom" id="PAX-OA-hia"/>
+                <constraint firstAttribute="bottom" secondItem="yzg-Vf-62A" secondAttribute="bottom" id="ToV-FM-5d7"/>
+                <constraint firstItem="yzg-Vf-62A" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="awc-aS-ukJ"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="276.5" y="205"/>
+        </view>
+    </objects>
+</document>
