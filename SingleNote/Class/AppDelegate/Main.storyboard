@@ -91,13 +91,7 @@
                             <constraint firstAttribute="trailing" secondItem="Fx8-za-Scu" secondAttribute="trailing" id="yA3-1B-qaq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="正在处理" id="jrD-05-DcV">
-                        <barButtonItem key="rightBarButtonItem" title="设置" id="g9F-j6-Dpj">
-                            <connections>
-                                <segue destination="zuL-JT-UtB" kind="show" identifier="setting" id="QEi-cD-K7H"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="正在处理" id="jrD-05-DcV"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>

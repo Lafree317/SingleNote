@@ -15,6 +15,9 @@ class LeanCloud: NSObject {
         let objs = NSMutableArray()
         for buyerModel in buyers {
             let obj = AVObject(className: "Buyer")
+            if  let str = buyerModel.objectId  {
+                obj.objectId = str
+            }
             obj.setObject(buyerModel.name, forKey: "name")
             obj.setObject(buyerModel.address, forKey: "address")
             obj.setObject(buyerModel.content, forKey: "content")
@@ -28,6 +31,9 @@ class LeanCloud: NSObject {
         let objs = NSMutableArray()
         for itemModel in items{
             let obj = AVObject(className: "Item")
+            if  let str = itemModel.objectId {
+                obj.objectId = str
+            }
             obj.setObject(itemModel.name, forKey: "name")
             obj.setObject(itemModel.inPrice, forKey: "inPrice")
             obj.setObject(itemModel.outPrice, forKey: "outPrice")
@@ -169,6 +175,7 @@ class LeanCloud: NSObject {
                 content = str as! String
             }
             let itemModel = ItemModel(name: name, inPrice: inPrice, outPrice: outPrice, number: number, content: content)
+            itemModel.objectId = obj.objectId
             itemArr.append(itemModel)
         }
         return itemArr
@@ -188,6 +195,7 @@ class LeanCloud: NSObject {
                 content = str as! String
             }
             let buyerModel = BuyerModel(name: name, address: address, content: content)
+            buyerModel.objectId = obj.objectId
             buyerArr.append(buyerModel)
         }
         return buyerArr

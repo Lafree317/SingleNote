@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class BuyerModel:NSObject {
+class BuyerModel:AVObject {
     var name:String?
     var address:String?
     var content:String?

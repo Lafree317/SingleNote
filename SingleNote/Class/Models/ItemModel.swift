@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ItemModel:NSObject {
+class ItemModel:AVObject {
     var name:String?
     var inPrice:Int?
     var outPrice:Int?
