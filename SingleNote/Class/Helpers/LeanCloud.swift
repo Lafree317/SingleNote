@@ -80,6 +80,7 @@ class LeanCloud: NSObject {
         query.orderByAscending("creatAt")
         query.includeKey("Buyers")
         query.includeKey("Items")
+        query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock { (objs, error) -> Void in
             var orders:Array<OrderModel> = []
             if objs == nil || objs.count <= 0 {
@@ -115,6 +116,7 @@ class LeanCloud: NSObject {
     func fetchAllBuyer(callBack:(buyers:Array<BuyerModel>)->Void){
         let query = AVQuery(className: "Buyer")
         query.orderByAscending("creatAt")
+        query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock { (objs, error) -> Void in
             var buyerArr:Array<BuyerModel> = []
             if objs == nil || objs.count <= 0 {
@@ -129,6 +131,7 @@ class LeanCloud: NSObject {
     func fetchAllItem(callBack:(buyers:Array<ItemModel>)->Void){
         let query = AVQuery(className: "Item")
         query.orderByAscending("creatAt")
+        query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock { (objs, error) -> Void in
             var itemArr:Array<ItemModel> = []
             if objs == nil || objs.count <= 0 {
@@ -139,6 +142,9 @@ class LeanCloud: NSObject {
             callBack(buyers: itemArr)
         }
     }
+    
+    
+    // MARK:FUNC
     func ResolveItemsWithObjs(objs:[AnyObject!]) ->Array<ItemModel>{
         var itemArr:Array<ItemModel> = []
         for obj in objs {

@@ -12,6 +12,8 @@ struct HomeCellModel:NoteCellDataSource {
     var buyerTitle = "Buyer:lafree,clover"
     var itemTitle = " - item:ball,water,someting"
     var optionTitle = "DONE"
+    var model: OrderModel = OrderModel()
+
 }
 
 extension HomeCellModel : NoteCellDelegate {

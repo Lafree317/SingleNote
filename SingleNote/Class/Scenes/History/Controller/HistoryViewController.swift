@@ -22,10 +22,7 @@ class HistoryViewController: UIViewController,UITabBarDelegate,UITableViewDataSo
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
     // MARK: - Table view data source
     /** 区数 */
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -68,5 +65,9 @@ class HistoryViewController: UIViewController,UITabBarDelegate,UITableViewDataSo
         // Pass the selected object to the new view controller.
     }
     */
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 
 }

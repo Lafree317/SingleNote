@@ -59,7 +59,7 @@ class TemplateViewController: UIViewController {
 
     @IBAction func clearAction(sender: UIBarButtonItem) {
         if status == NoteType.buyer.rawValue{
-            buyerView?.clear()
+            buyerView?.clearString()
         }else{
             itemView?.clear()
         }
@@ -76,7 +76,7 @@ class TemplateViewController: UIViewController {
                 leanCloud.saveAllBuyer(arr, callBack: { (objs) -> Void in
                     let obj = objs.firstObject as! AVObject
                     if obj.objectId != nil {
-                        weakSelf!.buyerView?.clear()
+                        weakSelf!.buyerView?.clearString()
                         weakSelf?.hud.hideHud()
                         weakSelf?.hud.showSuccess((weakSelf?.view)!, text: "保存成功")
                     } else {

@@ -12,6 +12,7 @@ protocol NoteCellDataSource{
     var buyerTitle:String{ get }
     var itemTitle:String{ get }
     var optionTitle:String { get }
+    var model:OrderModel { get }
 }
 protocol NoteCellDelegate{
     func optionClick()
@@ -45,8 +46,9 @@ class NoteCell: UITableViewCell {
         self.dataSource = dataSource
         self.delegate = delegate
         
-        buyer.text = dataSource.buyerTitle
-        item.text = dataSource.itemTitle
+//        buyer.text = model.buyersTitle
+        buyer.text = dataSource.model.buyersTitle
+        item.text = dataSource.model.itemsTitle
         option.setTitle(dataSource.optionTitle, forState: UIControlState.Normal)
         option.tintColor = delegate.optionTintColor
         

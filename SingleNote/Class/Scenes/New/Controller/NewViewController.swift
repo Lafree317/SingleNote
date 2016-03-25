@@ -9,10 +9,10 @@
 import UIKit
 
 class NewViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,NewFooterViewDelegate {
-
+    var passModel:OrderModel?
+    
     @IBOutlet weak var tableView: UITableView!
-    let buyerCellId = "BuyerCellIdentifer"
-    let itemCellId = "ItemCellIdentifer"
+
     var model:NewModel!
     var leanCloud = LeanCloud()
     var hud = ZEHud()
@@ -20,11 +20,15 @@ class NewViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         super.viewDidLoad()
         self.setUI()
     }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
     func setUI(){
         self.automaticallyAdjustsScrollViewInsets = false
-        self.tableView.registerNib(UINib.init(nibName: "BuyerCell", bundle: nil), forCellReuseIdentifier: buyerCellId)
-        self.tableView.registerNib(UINib.init(nibName: "ItemCell", bundle: nil), forCellReuseIdentifier: itemCellId)
-        model = NewModel()
+        self.tableView.registerNib(UINib.init(nibName: buyerCellNib, bundle: nil), forCellReuseIdentifier: buyerCellId)
+        self.tableView.registerNib(UINib.init(nibName: itemCellNib, bundle: nil), forCellReuseIdentifier: itemCellId)
+        model = NewModel(model: passModel)
     }
     
     @IBAction func saveOrderAction(sender: UIButton) {
@@ -78,7 +82,9 @@ class NewViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
-    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        self.view.endEditing(true)
+    }
     // MARK:Footer
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 30
@@ -98,7 +104,15 @@ class NewViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 model.addModel(NoteType.item)
             }
         } else {
-        
+            var sender = ""
+            if section == 0 {
+                sender = buyerCellId
+            }else{
+                sender = itemCellId
+            }
+            
+            
+           self.performSegueWithIdentifier("templateChose", sender: sender)
         
         }
         self.tableView.reloadData()
@@ -117,15 +131,20 @@ class NewViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         return 30
     }
     
-    /*
+   
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier ==  "templateChose" {
+            let vc = segue.destinationViewController as! TemplateChoseTableViewController
+            vc.type = sender as! String
+            vc.order = model.order
+        }
     }
-    */
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

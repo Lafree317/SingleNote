@@ -1,3 +1,5 @@
 pod 'AVOSCloud'
 pod 'MBProgressHUD'
+pod 'IQKeyboardManager'
+pod 'MJRefresh'
 

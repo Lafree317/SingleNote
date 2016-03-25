@@ -9,12 +9,17 @@
 import UIKit
 
 class HomeModel: NSObject {
-    var dataArr:Array<OrderModel> = []
+    var cellModels:Array<HomeCellModel> = []
     let leanCloud = LeanCloud()
     init(callBack:()->Void) {
         super.init()
         leanCloud.fetchAllOrder { (orders) -> Void in
-            self.dataArr = orders
+            
+            for order in orders{
+                var model = HomeCellModel()
+                model.model = order
+                self.cellModels.append(model)
+            }
             callBack()
         }
         

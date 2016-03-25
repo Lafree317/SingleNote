@@ -14,11 +14,15 @@ class NewModel: NSObject {
     var order:OrderModel!
 
         
-    override init(){
+    init(model:OrderModel?){
         super.init()
-        order = OrderModel()
-        self.addModel(.buyer)
-        self.addModel(.item)
+        if model == nil {
+            order = OrderModel()
+            self.addModel(.buyer)
+            self.addModel(.item)
+        }else{
+            self.order = model
+        }
     }
     func addModel(type:NoteType) {
         if type == .buyer {

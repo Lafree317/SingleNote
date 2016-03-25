@@ -36,6 +36,8 @@
 		52A12AE11CA1204600927E8B /* NoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52A12ABB1CA1204600927E8B /* NoteCell.xib */; };
 		52A12AE21CA1204600927E8B /* TemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A12AC41CA1204600927E8B /* TemplateViewController.swift */; };
 		52A12AE31CA1204600927E8B /* ZEHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A12AC81CA1204600927E8B /* ZEHud.swift */; };
+		52F244C71CA58020004AA526 /* TemplateChoseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F244C61CA58020004AA526 /* TemplateChoseTableViewController.swift */; };
+		52F244CB1CA584BA004AA526 /* TemplaceChoseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F244CA1CA584BA004AA526 /* TemplaceChoseModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +74,8 @@
 		52A12AC41CA1204600927E8B /* TemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateViewController.swift; sourceTree = "<group>"; };
 		52A12AC81CA1204600927E8B /* ZEHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZEHud.swift; sourceTree = "<group>"; };
 		52A12AE41CA1208D00927E8B /* SingleNote-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SingleNote-Bridging-Header.h"; sourceTree = "<group>"; };
+		52F244C61CA58020004AA526 /* TemplateChoseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateChoseTableViewController.swift; sourceTree = "<group>"; };
+		52F244CA1CA584BA004AA526 /* TemplaceChoseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplaceChoseModel.swift; sourceTree = "<group>"; };
 		AB8537DA5FD05885568C211E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -307,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				52A12AAC1CA1204600927E8B /* NewViewController.swift */,
+				52F244C61CA58020004AA526 /* TemplateChoseTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -315,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				52A12AAE1CA1204600927E8B /* NewModel.swift */,
+				52F244CA1CA584BA004AA526 /* TemplaceChoseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -574,6 +580,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52F244C71CA58020004AA526 /* TemplateChoseTableViewController.swift in Sources */,
 				52A12AD21CA1204600927E8B /* HistoryModel.swift in Sources */,
 				52A12ADC1CA1204600927E8B /* BuyerCell.swift in Sources */,
 				52A12ACF1CA1204600927E8B /* ItemModel.swift in Sources */,
@@ -586,6 +593,7 @@
 				52A12ACD1CA1204600927E8B /* Header.swift in Sources */,
 				52A12AD41CA1204600927E8B /* HomeCellModel.swift in Sources */,
 				52A12ACC1CA1204600927E8B /* LeanCloud.swift in Sources */,
+				52F244CB1CA584BA004AA526 /* TemplaceChoseModel.swift in Sources */,
 				52A12AD31CA1204600927E8B /* HomeViewController.swift in Sources */,
 				52A12AD01CA1204600927E8B /* OrderModel.swift in Sources */,
 				52A12AE31CA1204600927E8B /* ZEHud.swift in Sources */,

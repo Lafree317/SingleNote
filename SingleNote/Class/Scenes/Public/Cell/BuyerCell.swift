@@ -30,6 +30,15 @@ class BuyerCell: UITableViewCell,UITextViewDelegate,UITextFieldDelegate {
     func textFieldDidEndEditing(textField: UITextField) {
         refreshModel()
     }
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        
+        return true
+    }
+    
     func refreshModel(){
         buyerModel!.name = self.nameField.text
         buyerModel!.address = self.addressTV.text
@@ -44,11 +53,14 @@ class BuyerCell: UITableViewCell,UITextViewDelegate,UITextFieldDelegate {
         }
     }
     
-    func clear(){
+    func clearString(){
+        
         self.nameField.text = ""
         self.addressTV.text = ""
         self.contentTV.text = ""
     }
+    
+    
     
     func setModel(buyer:BuyerModel){
         self.buyerModel = buyer

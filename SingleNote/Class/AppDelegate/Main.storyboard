@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Xdx-3n-dcm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Xdx-3n-dcm">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--正在处理-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="homeVC" id="BYZ-38-t0r" customClass="HomeViewController" customModule="HandNote" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="homeVC" id="BYZ-38-t0r" customClass="HomeViewController" customModule="SingleNote" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -170,7 +170,7 @@
         <!--编辑模板-->
         <scene sceneID="7gu-vR-n8g">
             <objects>
-                <viewController storyboardIdentifier="template" id="q08-dd-9V5" customClass="TemplateViewController" customModule="HandNote" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="template" id="q08-dd-9V5" customClass="TemplateViewController" customModule="SingleNote" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fKj-TS-WA6"/>
                         <viewControllerLayoutGuide type="bottom" id="Drm-zU-nb0"/>
@@ -231,7 +231,7 @@
         <!--新建一笔-->
         <scene sceneID="bY8-jv-X0k">
             <objects>
-                <viewController storyboardIdentifier="newVC" id="VEy-TX-a8n" customClass="NewViewController" customModule="HandNote" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="newVC" id="VEy-TX-a8n" customClass="NewViewController" customModule="SingleNote" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XIw-vs-Gu6"/>
                         <viewControllerLayoutGuide type="bottom" id="5PV-C2-9cF"/>
@@ -242,7 +242,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ljh-Jf-wlR">
                                 <rect key="frame" x="0.0" y="64" width="375" height="553"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="VEy-TX-a8n" id="TJT-Wd-jmy"/>
                                     <outlet property="delegate" destination="VEy-TX-a8n" id="9bv-Re-XDg"/>
@@ -283,16 +283,46 @@
                     <navigationItem key="navigationItem" title="新建一笔" id="6uu-Ep-VjF"/>
                     <connections>
                         <outlet property="tableView" destination="ljh-Jf-wlR" id="zG6-FG-175"/>
+                        <segue destination="iYr-vC-ad4" kind="show" identifier="templateChose" id="deC-hK-bv2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Zz-fd-EJZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="556.5" y="1251.5"/>
         </scene>
+        <!--选择模板-->
+        <scene sceneID="OSh-BI-xS5">
+            <objects>
+                <tableViewController id="iYr-vC-ad4" customClass="TemplateChoseTableViewController" customModule="SingleNote" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="aAU-Lc-Vff">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="rdE-X8-qhB">
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rdE-X8-qhB" id="AiS-Ni-A38">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="iYr-vC-ad4" id="epy-fP-hBK"/>
+                            <outlet property="delegate" destination="iYr-vC-ad4" id="Gjb-BQ-FlO"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="选择模板" id="ns4-Ef-CC7"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YVy-45-hah" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="556.5" y="2083.5"/>
+        </scene>
         <!--历史记录-->
         <scene sceneID="8RD-Rm-cNL">
             <objects>
-                <viewController storyboardIdentifier="historyVC" id="l9K-Qv-73C" customClass="HistoryViewController" customModule="HandNote" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="historyVC" id="l9K-Qv-73C" customClass="HistoryViewController" customModule="SingleNote" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ppf-KJ-MeO"/>
                         <viewControllerLayoutGuide type="bottom" id="4Yj-oL-tQv"/>

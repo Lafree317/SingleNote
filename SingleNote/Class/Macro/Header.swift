@@ -13,3 +13,7 @@ enum NoteType: Int {
 }
 let ZEScreenWidth = UIScreen.mainScreen().bounds.size.width
 let ZEScreenHight = UIScreen.mainScreen().bounds.size.height
+let buyerCellId = "BuyerCellIdentifer"
+let itemCellId = "ItemCellIdentifer"
+let itemCellNib = "ItemCell"
+let buyerCellNib = "BuyerCell"

@@ -12,11 +12,41 @@ import UIKit
 class OrderModel:NSObject{
     var buyerArr:Array<BuyerModel> = []
     var itemArr:Array<ItemModel> = []
+    var buyersTitle:String?{
+        get {
+            var title = ""
+            for buyer in buyerArr{
+                if title != "" {
+                    title += ","
+                }
+                title = title + "\(buyer.name!)"
+            }
+            return title
+            }
+        set(value){
+            self.buyersTitle = value
+        }
+    }
+    var itemsTitle:String?{
+        get {
+            var title = ""
+            for item in itemArr{
+                if title != "" {
+                    title += ","
+                }
+                title = title + "\(item.name!)"
+            }
+            return title
+        }
+        set(value){
+            self.buyersTitle = value
+        }
+    }
     var cellModel:HomeCellModel?
     override init() {
         super.init()
 
-
+        
     }
 
 }

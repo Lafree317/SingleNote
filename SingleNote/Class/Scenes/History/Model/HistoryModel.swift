@@ -12,6 +12,7 @@ struct HistoryModel:NoteCellDataSource {
     var buyerTitle = "Buyer:lafree,clover"
     var itemTitle = " - item:ball,water,someting"
     var optionTitle = "CHECK"
+    var model: OrderModel = OrderModel()
 }
 
 extension HistoryModel:NoteCellDelegate {
