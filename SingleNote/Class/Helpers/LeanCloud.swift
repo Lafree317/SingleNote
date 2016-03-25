@@ -41,6 +41,10 @@ class LeanCloud: NSObject {
     }
     func saveOrder(orderModel:OrderModel,callBack:(success:Bool)->Void){
         let order = AVObject(className: "Order")
+        if orderModel.objectId != nil {
+            order.objectId = orderModel.objectId
+        }
+        order.setObject(orderModel.orderType, forKey: "orderType")
         var buyerFinish = false
         var itemFinish = false
         self.saveAllBuyer(orderModel.buyerArr) { (objs) -> Void in
@@ -75,9 +79,10 @@ class LeanCloud: NSObject {
     
     
     // MARK:FETCH
-    func fetchAllOrder(callBack:(orders:Array<OrderModel>)->Void){
+    func fetchAllOrder(orderType:String,callBack:(orders:Array<OrderModel>)->Void){
         let query = AVQuery(className: "Order")
         query.orderByAscending("creatAt")
+        query.whereKey("orderType", equalTo: orderType)
         query.includeKey("Buyers")
         query.includeKey("Items")
         query.orderByDescending("createdAt")
@@ -106,7 +111,13 @@ class LeanCloud: NSObject {
                 let order = OrderModel()
                 order.buyerArr = buyerArr
                 order.itemArr = itemArr
+                
+                order.orderType = localData.valueForKey("orderType") as! String
+                order.objectId = obj.objectId
                 orders.append(order)
+                
+                
+                
             }
             callBack(orders: orders)
         }

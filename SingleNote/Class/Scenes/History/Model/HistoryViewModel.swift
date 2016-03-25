@@ -1,19 +1,16 @@
 //
-//  HomeModel.swift
-//  PriceNote
+//  HistoryViewModel.swift
+//  SingleNote
 //
-//  Created by 胡春源 on 16/3/14.
+//  Created by 胡春源 on 16/3/26.
 //  Copyright © 2016年 胡春源. All rights reserved.
 //
 
 import UIKit
 
-struct HomeCellModel:NoteCellDataSource {
+struct HistoryViewModel:NoteCellDataSource {
     var buyerTitle = "Buyer:lafree,clover"
     var itemTitle = " - item:ball,water,someting"
-    var optionTitle = "DONE"
+    var optionTitle = "CHECK"
     var model: OrderModel = OrderModel()
-    var leanCloud = LeanCloud()
 }
-
-

@@ -15,8 +15,8 @@ protocol NoteCellDataSource{
     var model:OrderModel { get }
 }
 protocol NoteCellDelegate{
-    func optionClick()
-    var optionTintColor : UIColor{ get }
+    func optionClick(indexPath:NSIndexPath)
+ 
 }
 
 extension NoteCellDelegate {
@@ -35,23 +35,26 @@ class NoteCell: UITableViewCell {
     @IBOutlet weak var option: UIButton!
     
     private var dataSource:NoteCellDataSource?
-    private var delegate:NoteCellDelegate?
-    
+    var delegate:NoteCellDelegate?
+    var indexPath:NSIndexPath!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    func configure(dataSource:NoteCellDataSource,delegate:NoteCellDelegate){
+    func configure(dataSource:NoteCellDataSource){
         self.dataSource = dataSource
-        self.delegate = delegate
+        
         
 //        buyer.text = model.buyersTitle
         buyer.text = dataSource.model.buyersTitle
         item.text = dataSource.model.itemsTitle
         option.setTitle(dataSource.optionTitle, forState: UIControlState.Normal)
-        option.tintColor = delegate.optionTintColor
         
+        
+    }
+    @IBAction func buttonAction(sender: UIButton) {
+        delegate?.optionClick(indexPath)
     }
     
 

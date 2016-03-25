@@ -9,9 +9,11 @@
 import UIKit
 
 
-class OrderModel:NSObject{
+class OrderModel:AVObject{
     var buyerArr:Array<BuyerModel> = []
     var itemArr:Array<ItemModel> = []
+    var orderType:String = "normol"
+    
     var buyersTitle:String?{
         get {
             var title = ""

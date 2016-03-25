@@ -20,9 +20,6 @@ class TemplateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        leanCloud.fetchAllOrder { (orders) -> Void in
-            
-        }
 
         
         self.setUI()

@@ -8,21 +8,31 @@
 
 import UIKit
 
-class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-
+class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,NewViewControllerDelegate,NoteCellDelegate,HistoryViewControllerDelegate {
+    
     @IBOutlet weak var tableView: UITableView!
     
-    let noteCellId = "noteCellId"
+
+    let hud = ZEHud()
     var model:HomeModel!
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        model = HomeModel(callBack: { () -> Void in
-            self.tableView.reloadData()
-        })
+        model = HomeModel()
+        self.tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
+        self.tableView.mj_header.beginRefreshing()
         self.tableView.registerNib(UINib.init(nibName: "NoteCell", bundle: nil), forCellReuseIdentifier: noteCellId)
         // Do any additional setup after loading the view.
     }
-
+    func refresh(){
+        model.refresh {
+            self.tableView.reloadData()
+            self.tableView.mj_header.endRefreshing()
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -48,16 +58,29 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         let viewModel = model.cellModels[indexPath.row]
 //        let order = model.dataArr[indexPath.row]
+        cell.delegate = self
+        cell.indexPath = indexPath
         
-        
-        
-        cell.configure(viewModel, delegate: viewModel)
-        
-        // Configure the cell...
+        cell.configure(viewModel)
+
         
         return cell
     }
-    
+    func optionClick(indexPath: NSIndexPath) {
+        hud.showHud(self.view)
+        model.setOrderdone(indexPath) { (success) in
+            self.hud.hideHud()
+            if success {
+                self.hud.showSuccess(self.view, text: "订单完成")
+                self.tableView.mj_header.beginRefreshing()
+            }else{
+                self.hud.showError(self.view, text: "订单完成失败")
+            }
+        }
+    }
+    func newSaveSuccess() {
+        self.tableView.mj_header.beginRefreshing()
+    }
     /** 点击事件 */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let order = model.cellModels[indexPath.row].model
@@ -71,8 +94,11 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "new" {
             let vc = segue.destinationViewController as! NewViewController
-            
+            vc.delegate = self
             vc.passModel = sender as? OrderModel
+        }else if segue.identifier == "history" {
+            let vc = segue.destinationViewController as! HistoryViewController
+            vc.delegate = self
         }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.

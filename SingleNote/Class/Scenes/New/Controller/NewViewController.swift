@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol NewViewControllerDelegate {
+    func newSaveSuccess()
+}
+
 class NewViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,NewFooterViewDelegate {
     var passModel:OrderModel?
     
@@ -16,6 +20,7 @@ class NewViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var model:NewModel!
     var leanCloud = LeanCloud()
     var hud = ZEHud()
+    var delegate:NewViewControllerDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUI()
@@ -38,6 +43,9 @@ class NewViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             weakSelf!.hud.hideHud()
             if success{
                 weakSelf!.hud.showSuccess(self.view, text: "保存成功")
+                self.delegate?.newSaveSuccess()
+                self.navigationController?.popViewControllerAnimated(true)
+                
             } else {
                 weakSelf!.hud.showError(self.view, text: "保存失败")
             }

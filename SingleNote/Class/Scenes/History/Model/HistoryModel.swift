@@ -8,19 +8,26 @@
 
 import UIKit
 
-struct HistoryModel:NoteCellDataSource {
-    var buyerTitle = "Buyer:lafree,clover"
-    var itemTitle = " - item:ball,water,someting"
-    var optionTitle = "CHECK"
-    var model: OrderModel = OrderModel()
-}
-
-extension HistoryModel:NoteCellDelegate {
-    func optionClick(){
-        
-        
+class HistoryModel: NSObject {
+    var cellModels:Array<HistoryViewModel> = []
+    let leanCloud = LeanCloud()
+    
+    func refresh(callBack:()->Void){
+        cellModels = Array()
+        leanCloud.fetchAllOrder("done") { (orders) in
+            for order in orders{
+                var model = HistoryViewModel()
+                model.model = order
+                self.cellModels.append(model)
+            }
+            callBack()
+        }
     }
-    var optionTintColor:UIColor {
-        return UIColor.init(colorLiteralRed: 178/255.0, green: 24/255.0, blue: 137/255.0, alpha: 1)
+    func setOrderdone(indexPath:NSIndexPath,callBack:(success:Bool)->Void){
+        let order = cellModels[indexPath.row].model
+        order.orderType = "normol"
+        leanCloud.saveOrder(order) { (success) in
+            callBack(success: success)
+        }
     }
 }

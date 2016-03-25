@@ -8,15 +8,22 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController,UITabBarDelegate,UITableViewDataSource {
-    let noteCellId = "noteCellId"
+protocol HistoryViewControllerDelegate {
+    func newSaveSuccess()
+}
+
+class HistoryViewController: UIViewController,UITabBarDelegate,UITableViewDataSource,NoteCellDelegate {
     
-    
+    let hud = ZEHud()
+    var model = HistoryModel()
+    var delegate:HistoryViewControllerDelegate?
     @IBOutlet weak var tableView: UITableView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
+        self.tableView.mj_header.beginRefreshing()
         self.automaticallyAdjustsScrollViewInsets = false
         self.tableView.registerNib(UINib.init(nibName: "NoteCell", bundle: nil), forCellReuseIdentifier: noteCellId)
         // Do any additional setup after loading the view.
@@ -32,27 +39,52 @@ class HistoryViewController: UIViewController,UITabBarDelegate,UITableViewDataSo
     /** 行数 */
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return model.cellModels.count
     }
     /** 行高 */
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 70
     }
+    
     /** cell */
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(noteCellId, forIndexPath: indexPath) as! NoteCell
         cell.selectionStyle = UITableViewCellSelectionStyle.None
-        let viewModel = HistoryModel()
-        cell.configure(viewModel, delegate: viewModel)
+        let viewModel = model.cellModels[indexPath.row]
+        //        let order = model.dataArr[indexPath.row]
+        cell.delegate = self
+        cell.indexPath = indexPath
         
-        // Configure the cell...
+        cell.configure(viewModel)
         
         return cell
     }
-    
+    func refresh(){
+        model.refresh {
+            self.tableView.reloadData()
+            self.tableView.mj_header.endRefreshing()
+        }
+    }
+    func optionClick(indexPath: NSIndexPath) {
+        hud.showHud(self.view)
+        model.setOrderdone(indexPath) { (success) in
+            self.hud.hideHud()
+            if success {
+                self.hud.showSuccess(self.view, text: "订单恢复")
+                self.tableView.mj_header.beginRefreshing()
+                self.delegate?.newSaveSuccess()
+            }else{
+                self.hud.showError(self.view, text: "订单恢复失败")
+            }
+        }
+    }
+    func newSaveSuccess() {
+        self.tableView.mj_header.beginRefreshing()
+    }
     /** 点击事件 */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let order = model.cellModels[indexPath.row].model
+        self.performSegueWithIdentifier("new", sender: order)
     }
 
 

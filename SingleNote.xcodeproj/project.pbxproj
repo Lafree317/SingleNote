@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		19DA9DA7402554E5D23F89E4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F3B4258A2D407981FB5178 /* libPods.a */; };
+		52829E371CA5ADF400A788CF /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52829E361CA5ADF400A788CF /* HistoryViewModel.swift */; };
 		52A12A781CA11EC900927E8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52A12A771CA11EC900927E8B /* Assets.xcassets */; };
 		52A12AC91CA1204600927E8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A12A8C1CA1204600927E8B /* AppDelegate.swift */; };
 		52A12ACA1CA1204600927E8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52A12A8D1CA1204600927E8B /* LaunchScreen.storyboard */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		04F3B4258A2D407981FB5178 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DC26A31807502B63EC8A50D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		52829E361CA5ADF400A788CF /* HistoryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		52A12A6D1CA11EC900927E8B /* SingleNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52A12A771CA11EC900927E8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52A12A7C1CA11EC900927E8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				52A12AA11CA1204600927E8B /* HistoryModel.swift */,
+				52829E361CA5ADF400A788CF /* HistoryViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				52A12AD21CA1204600927E8B /* HistoryModel.swift in Sources */,
 				52A12ADC1CA1204600927E8B /* BuyerCell.swift in Sources */,
 				52A12ACF1CA1204600927E8B /* ItemModel.swift in Sources */,
+				52829E371CA5ADF400A788CF /* HistoryViewModel.swift in Sources */,
 				52A12AD81CA1204600927E8B /* NewFooterView.swift in Sources */,
 				52A12AD51CA1204600927E8B /* HomeModel.swift in Sources */,
 				52A12ADE1CA1204600927E8B /* ItemCell.swift in Sources */,

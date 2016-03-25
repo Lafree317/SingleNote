@@ -11,10 +11,10 @@ import UIKit
 class HomeModel: NSObject {
     var cellModels:Array<HomeCellModel> = []
     let leanCloud = LeanCloud()
-    init(callBack:()->Void) {
-        super.init()
-        leanCloud.fetchAllOrder { (orders) -> Void in
-            
+    
+    func refresh(callBack:()->Void){
+        cellModels = Array()
+        leanCloud.fetchAllOrder("normol") { (orders) in
             for order in orders{
                 var model = HomeCellModel()
                 model.model = order
@@ -22,6 +22,12 @@ class HomeModel: NSObject {
             }
             callBack()
         }
-        
+    }
+    func setOrderdone(indexPath:NSIndexPath,callBack:(success:Bool)->Void){
+        let order = cellModels[indexPath.row].model
+        order.orderType = "done"
+        leanCloud.saveOrder(order) { (success) in
+            callBack(success: success)
+        }
     }
 }
