@@ -18,3 +18,8 @@ let itemCellId = "ItemCellIdentifer"
 let itemCellNib = "ItemCell"
 let buyerCellNib = "BuyerCell"
 let noteCellId = "noteCellId"
+ let buyerClassName = "Buyer"
+ let itemClassName = "Item"
+ let orderClasName = "Order"
+typealias successBlock = (success:Bool)->Void
+ 

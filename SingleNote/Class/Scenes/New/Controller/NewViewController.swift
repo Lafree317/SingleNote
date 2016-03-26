@@ -139,6 +139,27 @@ class NewViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         return 30
     }
     
+    
+    // MARK: - Delete
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            hud.showHud(self.view)
+            model.removeObject(indexPath, callBack: { (success) in
+                self.hud.hideHud()
+                if success {
+                    self.hud.showSuccess(self.view, text: "删除成功")
+                    self.tableView.reloadData()
+                } else {
+                    self.hud.showError(self.view, text: "删除失败")
+                }
+            })
+            
+        }
+    }
+    
    
     // MARK: - Navigation
 

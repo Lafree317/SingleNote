@@ -23,7 +23,7 @@ class HomeModel: NSObject {
             callBack()
         }
     }
-    func setOrderdone(indexPath:NSIndexPath,callBack:(success:Bool)->Void){
+    func setOrderdone(indexPath:NSIndexPath,callBack:successBlock){
         let order = cellModels[indexPath.row].model
         order.orderType = "done"
         leanCloud.saveOrder(order) { (success) in

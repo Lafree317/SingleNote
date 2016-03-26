@@ -15,8 +15,7 @@ class BuyerModel:AVObject {
     var address:String?
     var content:String?
     
-    init(name:String,address:String,content:String){
-        super.init()
+    func setDetail(name:String,address:String,content:String){
         self.name = name
         self.address = address
         self.content = content

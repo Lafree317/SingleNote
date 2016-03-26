@@ -10,6 +10,7 @@ import UIKit
 
 class ZEHud: NSObject {
     var hud:MBProgressHUD?
+
     func showHud(view:UIView){
         hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
         hud?.dimBackground = true

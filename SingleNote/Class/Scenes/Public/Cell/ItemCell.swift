@@ -18,7 +18,8 @@ class ItemCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
     var itemModel:ItemModel?
     override func awakeFromNib() {
         super.awakeFromNib()
-        itemModel = ItemModel(name: "", inPrice: 0, outPrice: 0, number: 0, content: "")
+        itemModel = ItemModel(className: itemClassName)
+        itemModel!.setDetail("", inPrice: 0, outPrice: 0, number: 0, content: "")
         self.nameField.delegate = self
         self.inPriceField.delegate = self
         self.outPriceField.delegate = self

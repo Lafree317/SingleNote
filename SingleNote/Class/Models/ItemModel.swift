@@ -15,8 +15,7 @@ class ItemModel:AVObject {
     var number:Int?
     var content:String?
     
-    init(name:String,inPrice:Int,outPrice:Int,number:Int,content:String){
-        super.init()
+    func setDetail(name:String,inPrice:Int,outPrice:Int,number:Int,content:String){
         self.name = name
         self.inPrice = inPrice
         self.outPrice = outPrice

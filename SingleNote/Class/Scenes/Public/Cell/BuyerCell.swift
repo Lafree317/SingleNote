@@ -17,7 +17,8 @@ class BuyerCell: UITableViewCell,UITextViewDelegate,UITextFieldDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        buyerModel = BuyerModel(name: "", address: "", content: "")
+        buyerModel = BuyerModel(className: buyerClassName)
+        buyerModel?.setDetail("", address: "", content: "")
         
         // Initialization code
         self.nameField.delegate = self

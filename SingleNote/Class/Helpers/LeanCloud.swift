@@ -14,7 +14,7 @@ class LeanCloud: NSObject {
     func saveAllBuyer(buyers:Array<BuyerModel>,callBack:(objs:NSMutableArray)->Void) {
         let objs = NSMutableArray()
         for buyerModel in buyers {
-            let obj = AVObject(className: "Buyer")
+            let obj = AVObject(className: buyerClassName)
             if  let str = buyerModel.objectId  {
                 obj.objectId = str
             }
@@ -30,7 +30,7 @@ class LeanCloud: NSObject {
     func saveAllItem(items:Array<ItemModel>,callBack:(objs:NSMutableArray)->Void){
         let objs = NSMutableArray()
         for itemModel in items{
-            let obj = AVObject(className: "Item")
+            let obj = AVObject(className: itemClassName)
             if  let str = itemModel.objectId {
                 obj.objectId = str
             }
@@ -45,14 +45,17 @@ class LeanCloud: NSObject {
             callBack(objs: objs)
         }
     }
-    func saveOrder(orderModel:OrderModel,callBack:(success:Bool)->Void){
-        let order = AVObject(className: "Order")
+    func saveOrder(orderModel:OrderModel,callBack:successBlock){
+        let order = AVObject(className: orderClasName)
         if orderModel.objectId != nil {
             order.objectId = orderModel.objectId
         }
         order.setObject(orderModel.orderType, forKey: "orderType")
         var buyerFinish = false
         var itemFinish = false
+        
+        
+        // 这里需要改一改,不是没有数据就保存失败,而是网络失败才保存失败,没有数据考虑一下要不要保存个空
         self.saveAllBuyer(orderModel.buyerArr) { (objs) -> Void in
             if objs.firstObject?.objectId != nil {
                 order.setObject(objs, forKey: "Buyers")
@@ -86,7 +89,7 @@ class LeanCloud: NSObject {
     
     // MARK:FETCH
     func fetchAllOrder(orderType:String,callBack:(orders:Array<OrderModel>)->Void){
-        let query = AVQuery(className: "Order")
+        let query = AVQuery(className: orderClasName)
         query.orderByAscending("creatAt")
         query.whereKey("orderType", equalTo: orderType)
         query.includeKey("Buyers")
@@ -131,7 +134,7 @@ class LeanCloud: NSObject {
     }
     
     func fetchAllBuyer(callBack:(buyers:Array<BuyerModel>)->Void){
-        let query = AVQuery(className: "Buyer")
+        let query = AVQuery(className: buyerClassName)
         query.orderByAscending("creatAt")
         query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock { (objs, error) -> Void in
@@ -146,7 +149,7 @@ class LeanCloud: NSObject {
     }
     
     func fetchAllItem(callBack:(buyers:Array<ItemModel>)->Void){
-        let query = AVQuery(className: "Item")
+        let query = AVQuery(className: itemClassName)
         query.orderByAscending("creatAt")
         query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock { (objs, error) -> Void in
@@ -174,8 +177,12 @@ class LeanCloud: NSObject {
             if  let str = itemDic.valueForKey("content")  {
                 content = str as! String
             }
-            let itemModel = ItemModel(name: name, inPrice: inPrice, outPrice: outPrice, number: number, content: content)
+//            let item = ItemModel
+            
+            let itemModel = ItemModel(className:itemClassName)
+            itemModel.setDetail(name, inPrice: inPrice, outPrice: outPrice, number: number, content: content)
             itemModel.objectId = obj.objectId
+//            itemModel.className = obj.className
             itemArr.append(itemModel)
         }
         return itemArr
@@ -194,35 +201,35 @@ class LeanCloud: NSObject {
             if let str = buyerDic.valueForKey("content") {
                 content = str as! String
             }
-            let buyerModel = BuyerModel(name: name, address: address, content: content)
+            let buyerModel = BuyerModel(className: buyerClassName)
+            buyerModel.setDetail(name, address: address, content: content)
             buyerModel.objectId = obj.objectId
             buyerArr.append(buyerModel)
         }
         return buyerArr
     }
-/* 弃用方法
-    func saveBuyerModelInBackGround(buyer buyerModel:BuyerModel,callBack:(obj:AVObject)->Void){
-        let obj = AVObject(className: "Buyer")
-        obj.setObject(buyerModel.name, forKey: "name")
-        obj.setObject(buyerModel.address, forKey: "address")
-        obj.setObject(buyerModel.content, forKey: "content")
-        obj.saveInBackgroundWithBlock { (success, error) -> Void in
-            callBack(obj: obj)
-        }
-    }
+
     
-    func saveItemModelInBackGround(item itemModel:ItemModel,callBack:(obj:AVObject)->Void){
-        let obj = AVObject(className: "Item")
-        obj.setObject(itemModel.name, forKey: "name")
-        obj.setObject(itemModel.inPrice, forKey: "inPrice")
-        obj.setObject(itemModel.outPrice, forKey: "outPrice")
-        obj.setObject(itemModel.number, forKey: "number")
-        obj.setObject(itemModel.content, forKey: "content")
-        
-        obj.saveInBackgroundWithBlock { (success, error) -> Void in
-            callBack(obj: obj)
+    
+    // MARK: - Delete
+    
+    func deleteAVobject(order:OrderModel?,obj:AVObject,callBack:successBlock){
+        if order != nil {
+            // 嵌套毁掉其中一环出容易问题,但是方法可能已经执行了一半
+            obj.deleteInBackgroundWithBlock { (success, error) in
+                
+                self.saveOrder(order!, callBack: { (success) in
+                    callBack(success: success)
+                })
+
+                
+            }
+        }else{
+            obj.deleteInBackgroundWithBlock { (success, error) in
+                
+                callBack(success: success)
+                
+            }
         }
-        
     }
-*/
 }
