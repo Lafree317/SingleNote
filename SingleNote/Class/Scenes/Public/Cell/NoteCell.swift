@@ -44,14 +44,9 @@ class NoteCell: UITableViewCell {
     
     func configure(dataSource:NoteCellDataSource){
         self.dataSource = dataSource
-        
-        
-//        buyer.text = model.buyersTitle
         buyer.text = dataSource.model.buyersTitle
         item.text = dataSource.model.itemsTitle
         option.setTitle(dataSource.optionTitle, forState: UIControlState.Normal)
-        
-        
     }
     @IBAction func buttonAction(sender: UIButton) {
         delegate?.optionClick(indexPath)

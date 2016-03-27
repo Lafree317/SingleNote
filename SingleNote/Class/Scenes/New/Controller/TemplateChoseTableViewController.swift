@@ -45,7 +45,7 @@ class TemplateChoseTableViewController: UITableViewController {
         return model.cellHeight
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if type == itemCellId {
+        if type == itemClassName {
             let cell = tableView.dequeueReusableCellWithIdentifier(itemCellId, forIndexPath: indexPath) as! ItemCell
             cell.setModel(model.itemArr[indexPath.row])
             return cell
@@ -55,7 +55,23 @@ class TemplateChoseTableViewController: UITableViewController {
             return cell
         }
     }
-    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            ZEHud.sharedInstance.showHud(self.view)
+            model.removeTemplace(indexPath, callBack: { (success) in
+                ZEHud.sharedInstance.hideHud()
+                if success {
+                    ZEHud.sharedInstance.showSuccess(self.view, text: "删除成功")
+                    self.tableView.reloadData()
+                }else{
+                    ZEHud.sharedInstance.showError(self.view, text: "删除失败")
+                }
+            })
+        }
+    }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         model.addModel(indexPath)
         self.navigationController?.popViewControllerAnimated(true)

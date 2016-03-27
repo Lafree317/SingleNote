@@ -15,7 +15,7 @@ class TemplaceChoseModel: NSObject {
     var order:OrderModel!
     var count:Int{
         get{
-            if type == itemCellId {
+            if type == itemClassName {
                 return itemArr.count
             }else{
                 return buyerArr.count
@@ -29,7 +29,7 @@ class TemplaceChoseModel: NSObject {
         leanCloud = LeanCloud()
         self.order = order
         self.type = type
-        if type == itemCellId {
+        if type == itemClassName {
             leanCloud.fetchAllItem({ (items) in
                 self.itemArr = items
                 callBack()
@@ -45,18 +45,16 @@ class TemplaceChoseModel: NSObject {
     }
     
     func addModel(indexPath:NSIndexPath){
-        if type == itemCellId {
+        if type == itemClassName {
             order.itemArr.append(itemArr[indexPath.row])
             var arr:Array<Int> = []
             for  i in 0..<order.itemArr.count{
                 let item = order.itemArr[i]
                 if item.name == "" {
-                    arr.append(i)
+                    // 倒序
+                    arr.insert(i, atIndex: 0)
                 }
             }
-            arr.sortInPlace({ (a:Int, b:Int) -> Bool in
-                return a > b
-            })
             for i in 0 ..< arr.count {
                 order.itemArr.removeAtIndex(arr[i])
             }
@@ -69,17 +67,34 @@ class TemplaceChoseModel: NSObject {
                 let buyer = order.buyerArr[i]
                 if buyer.name == "" {
                     if buyer.name == "" {
-                        arr.append(i)
+                        // 倒序
+                        arr.insert(i, atIndex: 0)
                     }
                 }
-                
             }
-            arr.sortInPlace({ (a:Int, b:Int) -> Bool in
-                return a > b
-            })
             for i in 0 ..< arr.count {
                 order.buyerArr.removeAtIndex(arr[i])
             }
+        }
+    }
+    
+    
+    func removeTemplace(indexpath:NSIndexPath,callBack:successBlock) {
+        let model:AVObject
+        if type == buyerClassName {
+            model = buyerArr[indexpath.row]
+        }else{
+            model = itemArr[indexpath.row]
+        }
+        leanCloud.deleteAVobject(model) { (success) in
+            if success {
+                if self.type == buyerClassName {
+                    self.buyerArr.removeAtIndex(indexpath.row)
+                }else{
+                    self.itemArr.removeAtIndex(indexpath.row)
+                }
+            }
+            callBack(success: success)
         }
     }
 

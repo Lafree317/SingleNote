@@ -9,6 +9,9 @@
 import UIKit
 
 class ZEHud: NSObject {
+
+    static let sharedInstance = ZEHud()
+    private override init() {}
     var hud:MBProgressHUD?
 
     func showHud(view:UIView){

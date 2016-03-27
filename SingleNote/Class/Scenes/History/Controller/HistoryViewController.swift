@@ -14,7 +14,7 @@ protocol HistoryViewControllerDelegate {
 
 class HistoryViewController: UIViewController,UITabBarDelegate,UITableViewDataSource,NoteCellDelegate {
     
-    let hud = ZEHud()
+    let hud = ZEHud.sharedInstance
     var model = HistoryModel()
     var delegate:HistoryViewControllerDelegate?
     @IBOutlet weak var tableView: UITableView!
@@ -86,8 +86,7 @@ class HistoryViewController: UIViewController,UITabBarDelegate,UITableViewDataSo
         let order = model.cellModels[indexPath.row].model
         self.performSegueWithIdentifier("new", sender: order)
     }
-
-
+    
     /*
     // MARK: - Navigation
 

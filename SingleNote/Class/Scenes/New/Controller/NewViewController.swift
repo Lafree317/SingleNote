@@ -19,7 +19,7 @@ class NewViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
 
     var model:NewModel!
     var leanCloud = LeanCloud()
-    var hud = ZEHud()
+    var hud = ZEHud.sharedInstance
     var delegate:NewViewControllerDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,9 +114,9 @@ class NewViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         } else {
             var sender = ""
             if section == 0 {
-                sender = buyerCellId
+                sender = buyerClassName
             }else{
-                sender = itemCellId
+                sender = itemClassName
             }
             
             

@@ -13,7 +13,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBOutlet weak var tableView: UITableView!
     
 
-    let hud = ZEHud()
+    
     var model:HomeModel!
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -57,24 +57,20 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let cell = tableView.dequeueReusableCellWithIdentifier(noteCellId, forIndexPath: indexPath) as! NoteCell
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         let viewModel = model.cellModels[indexPath.row]
-//        let order = model.dataArr[indexPath.row]
         cell.delegate = self
         cell.indexPath = indexPath
-        
         cell.configure(viewModel)
-
-        
         return cell
     }
     func optionClick(indexPath: NSIndexPath) {
-        hud.showHud(self.view)
+        ZEHud.sharedInstance.showHud(self.view)
         model.setOrderdone(indexPath) { (success) in
-            self.hud.hideHud()
+            ZEHud.sharedInstance.hideHud()
             if success {
-                self.hud.showSuccess(self.view, text: "订单完成")
+                ZEHud.sharedInstance.showSuccess(self.view, text: "订单完成")
                 self.tableView.mj_header.beginRefreshing()
             }else{
-                self.hud.showError(self.view, text: "订单完成失败")
+                ZEHud.sharedInstance.showError(self.view, text: "订单完成失败")
             }
         }
     }

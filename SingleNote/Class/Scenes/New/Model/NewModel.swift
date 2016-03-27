@@ -37,18 +37,46 @@ class NewModel: NSObject {
         }
     }
     func removeObject(indexpath:NSIndexPath,callBack:successBlock){
-        let model:AVObject
+
         // 如果提前删除数组元素 保存失败会崩
         if indexpath.section == 0 {
-            model = order.buyerArr[indexpath.row]
-            self.order.buyerArr.removeAtIndex(indexpath.row)
+            if self.order.buyerArr.count > 0 {
+                self.order.buyerArr.removeAtIndex(indexpath.row)
+            }
         }else{
-            model = order.itemArr[indexpath.row]
-            self.order.itemArr.removeAtIndex(indexpath.row)
+            if  self.order.itemArr.count > 0 {
+                self.order.itemArr.removeAtIndex(indexpath.row)
+            }
         }
-        leanCloud.deleteAVobject(order, obj: model) { (success) in
+        // 如果取出的obj为空
+        leanCloud.saveOrder(self.order) { (success) in
+            
+            
+            
             callBack(success: success)
-        }
+            
+            
+            
+    }
+//        // 先删除一个obj
+//        leanCloud.deleteAVobject(model!) { (success) in
+//            if success {
+//                // 成功后order的数组里面删除那个值
+//                if indexpath.section == 0 {
+//                    self.order.buyerArr.removeAtIndex(indexpath.row)
+//                }else{
+//                    self.order.itemArr.removeAtIndex(indexpath.row)
+//                }
+//                // 更新order
+//                self.leanCloud.saveOrder(self.order!, callBack: { (success) in
+//                    // 回调是否成功
+//                    callBack(success: success)
+//                })
+//            }else{
+//                callBack(success: false)
+//            }
+//            
+//        }
         
     }
 }

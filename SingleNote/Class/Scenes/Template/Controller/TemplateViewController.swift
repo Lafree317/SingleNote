@@ -16,7 +16,7 @@ class TemplateViewController: UIViewController {
     var itemView:ItemCell?
     var status = 0
     var leanCloud = LeanCloud()
-    var hud = ZEHud()
+    var hud = ZEHud.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
