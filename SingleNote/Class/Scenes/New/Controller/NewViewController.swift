@@ -38,18 +38,16 @@ class NewViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     @IBAction func saveOrderAction(sender: UIButton) {
         hud.showHud(self.view)
-        weak var weakSelf = self
-        leanCloud.saveOrder(model.order) { (success) -> Void in
-            weakSelf!.hud.hideHud()
-            if success{
-                weakSelf!.hud.showSuccess(self.view, text: "保存成功")
-                self.delegate?.newSaveSuccess()
+        model.saveOrder { (success, type) in
+            if success {
+                ZEHud.sharedInstance.showSuccess(self.view, text: type)
                 self.navigationController?.popViewControllerAnimated(true)
-                
-            } else {
-                weakSelf!.hud.showError(self.view, text: "保存失败")
+                self.delegate?.newSaveSuccess()
+            }else{
+                ZEHud.sharedInstance.showSuccess(self.view, text: type)
             }
         }
+        
     }
     
     
@@ -145,15 +143,21 @@ class NewViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         return true
     }
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        // 判断操作类型
         if editingStyle == UITableViewCellEditingStyle.Delete {
             hud.showHud(self.view)
-            model.removeObject(indexPath, callBack: { (success) in
+            // 执行model删除方法
+            model.removeObject(indexPath, callBack: { (success, type) in
                 self.hud.hideHud()
                 if success {
-                    self.hud.showSuccess(self.view, text: "删除成功")
                     self.tableView.reloadData()
+                    self.hud.showSuccess(self.view, text: type)
+                    if type == "订单不完整删除成功" {
+                        self.navigationController?.popViewControllerAnimated(true)
+                        self.delegate?.newSaveSuccess()
+                    }
                 } else {
-                    self.hud.showError(self.view, text: "删除失败")
+                    self.hud.showError(self.view, text: type)
                 }
             })
             

@@ -19,9 +19,15 @@ class TemplateChoseTableViewController: UITableViewController {
     var delegate:TemplateChoseTableViewControllerDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
-        model = TemplaceChoseModel(order:order,type: type, tableView: self.tableView, callBack: {
+        model = TemplaceChoseModel(order:order,type: type, tableView: self.tableView)
+        model.refresh { (success, type) in
+            if success {
+                
+            }else{
+                ZEHud.sharedInstance.showError(self.view, text: type)
+            }
             self.tableView.reloadData()
-        })
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,15 +65,17 @@ class TemplateChoseTableViewController: UITableViewController {
         return true
     }
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        // 判断操作类型
         if editingStyle == UITableViewCellEditingStyle.Delete {
             ZEHud.sharedInstance.showHud(self.view)
-            model.removeTemplace(indexPath, callBack: { (success) in
+            // 执行model删除方法
+            model.removeTemplace(indexPath, callBack: { (success, type) in
                 ZEHud.sharedInstance.hideHud()
                 if success {
-                    ZEHud.sharedInstance.showSuccess(self.view, text: "删除成功")
+                    ZEHud.sharedInstance.showSuccess(self.view, text:type)
                     self.tableView.reloadData()
                 }else{
-                    ZEHud.sharedInstance.showError(self.view, text: "删除失败")
+                    ZEHud.sharedInstance.showError(self.view, text:type)
                 }
             })
         }
@@ -76,49 +84,4 @@ class TemplateChoseTableViewController: UITableViewController {
         model.addModel(indexPath)
         self.navigationController?.popViewControllerAnimated(true)
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

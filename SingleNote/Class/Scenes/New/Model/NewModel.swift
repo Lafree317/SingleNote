@@ -36,9 +36,9 @@ class NewModel: NSObject {
             order.itemArr.append(itemModel)
         }
     }
-    func removeObject(indexpath:NSIndexPath,callBack:successBlock){
+    func removeObject(indexpath:NSIndexPath,callBack:successTypeBlock){
 
-        // 如果提前删除数组元素 保存失败会崩
+        // 删除元素
         if indexpath.section == 0 {
             if self.order.buyerArr.count > 0 {
                 self.order.buyerArr.removeAtIndex(indexpath.row)
@@ -48,36 +48,15 @@ class NewModel: NSObject {
                 self.order.itemArr.removeAtIndex(indexpath.row)
             }
         }
-        // 如果取出的obj为空
-        leanCloud.saveOrder(self.order) { (success) in
-            
-            
-            
-            callBack(success: success)
-            
-            
-            
+        // 保存订单
+        leanCloud.saveOrder(self.order) { (success, type) in
+            callBack(success: success, type: type)
+        }
     }
-//        // 先删除一个obj
-//        leanCloud.deleteAVobject(model!) { (success) in
-//            if success {
-//                // 成功后order的数组里面删除那个值
-//                if indexpath.section == 0 {
-//                    self.order.buyerArr.removeAtIndex(indexpath.row)
-//                }else{
-//                    self.order.itemArr.removeAtIndex(indexpath.row)
-//                }
-//                // 更新order
-//                self.leanCloud.saveOrder(self.order!, callBack: { (success) in
-//                    // 回调是否成功
-//                    callBack(success: success)
-//                })
-//            }else{
-//                callBack(success: false)
-//            }
-//            
-//        }
-        
+    func saveOrder(callback:successTypeBlock){
+        leanCloud.saveOrder(order) { (success, type) in
+            callback(success: success, type: type)
+        }
     }
 }
 

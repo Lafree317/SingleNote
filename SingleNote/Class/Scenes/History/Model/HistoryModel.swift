@@ -14,7 +14,7 @@ class HistoryModel: NSObject {
     
     func refresh(callBack:()->Void){
         cellModels = Array()
-        leanCloud.fetchAllOrder("done") { (orders) in
+        leanCloud.fetchAllOrder(doneString) { (orders, type) in
             for order in orders{
                 var model = HistoryViewModel()
                 model.model = order
@@ -25,7 +25,7 @@ class HistoryModel: NSObject {
     }
     func setOrderdone(indexPath:NSIndexPath,callBack:successBlock){
         let order = cellModels[indexPath.row].model
-        order.orderType = "normol"
+        order.orderType = checkString
         leanCloud.saveOrder(order) { (success) in
             callBack(success: success)
         }

@@ -12,7 +12,7 @@ import UIKit
 class OrderModel:AVObject{
     var buyerArr:Array<BuyerModel> = []
     var itemArr:Array<ItemModel> = []
-    var orderType:String = "normol"
+    var orderType:String = checkString
     
     var buyersTitle:String?{
         get {

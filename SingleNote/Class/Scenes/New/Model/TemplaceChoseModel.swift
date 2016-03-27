@@ -24,26 +24,35 @@ class TemplaceChoseModel: NSObject {
     }
     var buyerArr:Array<BuyerModel> = []
     var itemArr:Array<ItemModel> = []
-    init(order:OrderModel,type:String,tableView:UITableView,callBack:()->Void) {
+    init(order:OrderModel,type:String,tableView:UITableView) {
         super.init()
         leanCloud = LeanCloud()
         self.order = order
         self.type = type
-        if type == itemClassName {
-            leanCloud.fetchAllItem({ (items) in
-                self.itemArr = items
-                callBack()
-            })
-        }else{
-            leanCloud.fetchAllBuyer({ (buyers) in
-                self.buyerArr = buyers
-                callBack()
-            })
-        }
+
         tableView.registerNib(UINib.init(nibName: itemCellNib, bundle: nil), forCellReuseIdentifier:itemCellId)
         tableView.registerNib(UINib.init(nibName: buyerCellNib, bundle: nil), forCellReuseIdentifier: buyerCellId)
     }
-    
+    func refresh(callback:successTypeBlock){
+        if type == itemClassName {
+            leanCloud.fetchAllItem({ (items, success, type) in
+                self.itemArr = items
+                callback(success: success, type: type)
+            })
+        }else{
+            leanCloud.fetchAllBuyer({ (buyers, type) in
+                let success:Bool
+                if type != successType{
+                    success = false
+                }else{
+                    self.buyerArr = buyers
+                    success = true
+                }
+                callback(success: success, type: type)
+                
+            })
+        }
+    }
     func addModel(indexPath:NSIndexPath){
         if type == itemClassName {
             order.itemArr.append(itemArr[indexPath.row])
@@ -79,14 +88,16 @@ class TemplaceChoseModel: NSObject {
     }
     
     
-    func removeTemplace(indexpath:NSIndexPath,callBack:successBlock) {
+    func removeTemplace(indexpath:NSIndexPath,callBack:successTypeBlock) {
         let model:AVObject
+        // 取出model
         if type == buyerClassName {
             model = buyerArr[indexpath.row]
         }else{
             model = itemArr[indexpath.row]
         }
-        leanCloud.deleteAVobject(model) { (success) in
+        // 执行删除方法
+        leanCloud.deleteAVobject(model) { (success, type) in
             if success {
                 if self.type == buyerClassName {
                     self.buyerArr.removeAtIndex(indexpath.row)
@@ -94,7 +105,7 @@ class TemplaceChoseModel: NSObject {
                     self.itemArr.removeAtIndex(indexpath.row)
                 }
             }
-            callBack(success: success)
+            callBack(success: success, type: type)
         }
     }
 

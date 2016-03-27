@@ -28,8 +28,11 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         // Do any additional setup after loading the view.
     }
     func refresh(){
-        model.refresh {
+        model.refresh { (success, type) in
             self.tableView.reloadData()
+            if success == false {
+                ZEHud.sharedInstance.showError(self.view, text:type)
+            }
             self.tableView.mj_header.endRefreshing()
         }
     }
