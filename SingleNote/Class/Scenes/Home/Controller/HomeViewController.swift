@@ -122,5 +122,11 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         // Pass the selected object to the new view controller.
     }
 
+    // 模板懒加载
+    lazy var templateView:TemplateView = {
+        let tempView = TemplateView()
 
+        return tempView
+    }()
+    
 }

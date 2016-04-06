@@ -16,8 +16,7 @@ class ZEHud: NSObject {
 
     func showHud(view:UIView){
         hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        hud?.dimBackground = true
-//        hud?.removeFromSuperViewOnHide = true
+
     }
     func hideHud(){
         hud?.hide(true, afterDelay: 0.7)
