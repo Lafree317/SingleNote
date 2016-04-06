@@ -23,11 +23,11 @@ class HistoryModel: NSObject {
             callBack()
         }
     }
-    func setOrderdone(indexPath:NSIndexPath,callBack:successBlock){
+    func setOrderdone(indexPath:NSIndexPath,callBack:successTypeBlock){
         let order = cellModels[indexPath.row].model
         order.orderType = checkString
-        leanCloud.saveOrder(order) { (success) in
-            callBack(success: success)
+        leanCloud.saveOrder(order) { (success, type) in
+            callBack(success: success, type: type)
         }
     }
 }

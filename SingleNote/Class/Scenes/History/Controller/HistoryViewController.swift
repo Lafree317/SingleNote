@@ -12,7 +12,7 @@ protocol HistoryViewControllerDelegate {
     func newSaveSuccess()
 }
 
-class HistoryViewController: UIViewController,UITabBarDelegate,UITableViewDataSource,NoteCellDelegate {
+class HistoryViewController: UIViewController,UITabBarDelegate,UITableViewDataSource,NoteCellDelegate,NewViewControllerDelegate {
     
     let hud = ZEHud.sharedInstance
     var model = HistoryModel()
@@ -67,14 +67,14 @@ class HistoryViewController: UIViewController,UITabBarDelegate,UITableViewDataSo
     }
     func optionClick(indexPath: NSIndexPath) {
         hud.showHud(self.view)
-        model.setOrderdone(indexPath) { (success) in
+        model.setOrderdone(indexPath) { (success, type) in
             self.hud.hideHud()
             if success {
-                self.hud.showSuccess(self.view, text: "订单恢复")
+                self.hud.showSuccess(self.view, text:"订单恢复成功")
                 self.tableView.mj_header.beginRefreshing()
                 self.delegate?.newSaveSuccess()
             }else{
-                self.hud.showError(self.view, text: "订单恢复失败")
+                self.hud.showError(self.view, text:"订单恢复失败")
             }
         }
     }
@@ -85,6 +85,13 @@ class HistoryViewController: UIViewController,UITabBarDelegate,UITableViewDataSo
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let order = model.cellModels[indexPath.row].model
         self.performSegueWithIdentifier("new", sender: order)
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "new" {
+            let vc = segue.destinationViewController as! NewViewController
+            vc.delegate = self
+            vc.passModel = sender as? OrderModel
+        }
     }
     
     /*

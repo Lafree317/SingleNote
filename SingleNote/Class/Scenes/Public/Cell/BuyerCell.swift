@@ -16,7 +16,7 @@ class BuyerCell: UITableViewCell,UITextViewDelegate,UITextFieldDelegate {
     var buyerModel:BuyerModel?
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        self.selectionStyle = .None
         buyerModel = BuyerModel(className: buyerClassName)
         buyerModel?.setDetail("", address: "", content: "")
         

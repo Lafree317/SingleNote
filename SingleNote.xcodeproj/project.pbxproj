@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		19DA9DA7402554E5D23F89E4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F3B4258A2D407981FB5178 /* libPods.a */; };
+		520A411F1CB3E8B500D68695 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 520A411E1CB3E8B500D68695 /* Icon.png */; };
 		52829E371CA5ADF400A788CF /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52829E361CA5ADF400A788CF /* HistoryViewModel.swift */; };
 		52A12A781CA11EC900927E8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52A12A771CA11EC900927E8B /* Assets.xcassets */; };
 		52A12AC91CA1204600927E8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A12A8C1CA1204600927E8B /* AppDelegate.swift */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		04F3B4258A2D407981FB5178 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DC26A31807502B63EC8A50D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		520A411E1CB3E8B500D68695 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		52829E361CA5ADF400A788CF /* HistoryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		52A12A6D1CA11EC900927E8B /* SingleNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52A12A771CA11EC900927E8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			children = (
 				52A12A8A1CA1204500927E8B /* Class */,
 				52A12A771CA11EC900927E8B /* Assets.xcassets */,
+				520A411E1CB3E8B500D68695 /* Icon.png */,
 				52A12A7C1CA11EC900927E8B /* Info.plist */,
 			);
 			path = SingleNote;
@@ -518,6 +521,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				520A411F1CB3E8B500D68695 /* Icon.png in Resources */,
 				52A12ACB1CA1204600927E8B /* Main.storyboard in Resources */,
 				52A12A781CA11EC900927E8B /* Assets.xcassets in Resources */,
 				52A12AD91CA1204600927E8B /* NewFooterView.xib in Resources */,

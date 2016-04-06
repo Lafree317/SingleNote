@@ -45,8 +45,12 @@ class NoteCell: UITableViewCell {
     func configure(dataSource:NoteCellDataSource){
         self.dataSource = dataSource
         buyer.text = dataSource.model.buyersTitle
+        buyer.sizeToFit()
         item.text = dataSource.model.itemsTitle
+        item.sizeToFit()
         option.setTitle(dataSource.optionTitle, forState: UIControlState.Normal)
+        self.item.layoutIfNeeded()
+        self.contentView.frame = CGRectMake(0, 0, ZEScreenWidth, CGRectGetMaxY(self.item.frame) + 8)
     }
     @IBAction func buttonAction(sender: UIButton) {
         delegate?.optionClick(indexPath)

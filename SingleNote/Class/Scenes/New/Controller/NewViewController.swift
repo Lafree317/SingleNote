@@ -76,6 +76,7 @@ class NewViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(buyerCellId, forIndexPath: indexPath) as! BuyerCell
             cell.setModel(model.order.buyerArr[indexPath.row])
+            
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(itemCellId, forIndexPath: indexPath) as! ItemCell

@@ -13,8 +13,8 @@ class HomeModel: NSObject {
     let leanCloud = LeanCloud()
     
     func refresh(callBack:successTypeBlock){
-        cellModels = Array()
         leanCloud.fetchAllOrder(checkString) { (orders, type) in
+            self.cellModels = Array()
             
             for order in orders{
                 var model = HomeCellModel()
@@ -28,12 +28,12 @@ class HomeModel: NSObject {
             }
         }
     }
-    func setOrderdone(indexPath:NSIndexPath,callBack:successBlock){
+    func setOrderdone(indexPath:NSIndexPath,callBack:successTypeBlock){
         let order = cellModels[indexPath.row].model
         order.orderType = doneString
-        leanCloud.saveOrder(order) { (succ) in
-            
-//            callBack(success: succe, type: "")
+        leanCloud.saveOrder(order) { (success, type) in
+
+            callBack(success: success, type: type)
         }
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,NewViewControllerDelegate,NoteCellDelegate,HistoryViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    
+    var prototypeCell:NoteCell!
 
     
     var model:HomeModel!
@@ -25,15 +25,17 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         self.tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         self.tableView.mj_header.beginRefreshing()
         self.tableView.registerNib(UINib.init(nibName: "NoteCell", bundle: nil), forCellReuseIdentifier: noteCellId)
+        prototypeCell = self.tableView.dequeueReusableCellWithIdentifier(noteCellId) as! NoteCell
         // Do any additional setup after loading the view.
     }
     func refresh(){
         model.refresh { (success, type) in
-            self.tableView.reloadData()
+            
             if success == false {
                 ZEHud.sharedInstance.showError(self.view, text:type)
             }
             self.tableView.mj_header.endRefreshing()
+            self.tableView.reloadData()
         }
     }
     override func didReceiveMemoryWarning() {
@@ -44,22 +46,29 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     /** 区数 */
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return model.cellModels.count
     }
     /** 行数 */
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return model.cellModels.count
+        return 1
     }
     /** 行高 */
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 70
+        
+        
+        let viewModel = model.cellModels[indexPath.section]
+        prototypeCell.delegate = self
+        prototypeCell.indexPath = indexPath
+        prototypeCell.configure(viewModel)
+        
+        return prototypeCell.contentView.frame.size.height
     }
     /** cell */
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(noteCellId, forIndexPath: indexPath) as! NoteCell
         cell.selectionStyle = UITableViewCellSelectionStyle.None
-        let viewModel = model.cellModels[indexPath.row]
+        let viewModel = model.cellModels[indexPath.section]
         cell.delegate = self
         cell.indexPath = indexPath
         cell.configure(viewModel)
@@ -67,7 +76,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     func optionClick(indexPath: NSIndexPath) {
         ZEHud.sharedInstance.showHud(self.view)
-        model.setOrderdone(indexPath) { (success) in
+        model.setOrderdone(indexPath) { (success, type) in
             ZEHud.sharedInstance.hideHud()
             if success {
                 ZEHud.sharedInstance.showSuccess(self.view, text: "订单完成")
@@ -82,10 +91,20 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     /** 点击事件 */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let order = model.cellModels[indexPath.row].model
+        let order = model.cellModels[indexPath.section].model
         self.performSegueWithIdentifier("new", sender: order)
     }
     
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0.001
+        }else{
+            return 5
+        }
+    }
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 5
+    }
   
     // MARK: - Navigation
 
