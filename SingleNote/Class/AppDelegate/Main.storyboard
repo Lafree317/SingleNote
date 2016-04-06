@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="603" width="375" height="64"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Opz-Fk-G4k">
-                                        <rect key="frame" x="0.0" y="0.0" width="155" height="64"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="64"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <state key="normal" title="编辑模板"/>
                                         <connections>
@@ -32,7 +32,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A4H-Q1-hJw">
-                                        <rect key="frame" x="219" y="0.0" width="156" height="64"/>
+                                        <rect key="frame" x="229" y="0.0" width="146" height="64"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <state key="normal" title="历史记录"/>
                                         <connections>
@@ -46,13 +46,14 @@
                                             <constraint firstAttribute="height" constant="64" id="oGJ-xr-IpF"/>
                                         </constraints>
                                         <color key="tintColor" red="0.39607843139999999" green="0.59607843140000005" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" backgroundImage="add"/>
+                                        <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                                        <state key="normal" image="add"/>
                                         <connections>
                                             <segue destination="VEy-TX-a8n" kind="show" identifier="new" id="wzu-04-R1h"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.053987068965517242" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.14999999999999999" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="A4H-Q1-hJw" firstAttribute="top" secondItem="Fx8-za-Scu" secondAttribute="top" id="8fX-7p-cyV"/>
                                     <constraint firstItem="po9-7d-fi5" firstAttribute="centerX" secondItem="Fx8-za-Scu" secondAttribute="centerX" id="BOS-LD-Hb9"/>
@@ -60,11 +61,11 @@
                                     <constraint firstItem="po9-7d-fi5" firstAttribute="centerY" secondItem="Fx8-za-Scu" secondAttribute="centerY" id="XD0-fV-vCa"/>
                                     <constraint firstAttribute="height" constant="64" id="agB-2Z-7Tt"/>
                                     <constraint firstItem="Opz-Fk-G4k" firstAttribute="leading" secondItem="Fx8-za-Scu" secondAttribute="leading" id="dIS-jS-9dD"/>
-                                    <constraint firstItem="po9-7d-fi5" firstAttribute="leading" secondItem="Opz-Fk-G4k" secondAttribute="trailing" id="eQI-MT-MrK"/>
+                                    <constraint firstItem="po9-7d-fi5" firstAttribute="leading" secondItem="Opz-Fk-G4k" secondAttribute="trailing" constant="10" id="eQI-MT-MrK"/>
                                     <constraint firstAttribute="bottom" secondItem="A4H-Q1-hJw" secondAttribute="bottom" id="rwL-i9-Kcg"/>
                                     <constraint firstItem="Opz-Fk-G4k" firstAttribute="top" secondItem="Fx8-za-Scu" secondAttribute="top" id="uhy-5J-bXc"/>
                                     <constraint firstAttribute="bottom" secondItem="Opz-Fk-G4k" secondAttribute="bottom" id="ukH-GF-YZN"/>
-                                    <constraint firstItem="A4H-Q1-hJw" firstAttribute="leading" secondItem="po9-7d-fi5" secondAttribute="trailing" id="yVk-Ak-d6I"/>
+                                    <constraint firstItem="A4H-Q1-hJw" firstAttribute="leading" secondItem="po9-7d-fi5" secondAttribute="trailing" constant="10" id="yVk-Ak-d6I"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="QyR-i7-qDi">

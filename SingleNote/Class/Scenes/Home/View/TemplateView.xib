@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="350" height="291"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cSJ-XT-Nt8">
+                    <rect key="frame" x="10" y="40" width="330" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="9q9-Ef-6td"/>
+                    </constraints>
+                    <segments>
+                        <segment title="买家"/>
+                        <segment title="物品"/>
+                    </segments>
+                </segmentedControl>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L6Z-7R-QuN">
+                    <rect key="frame" x="0.0" y="241" width="350" height="50"/>
+                    <color key="backgroundColor" red="0.0" green="0.49803921569999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="jmx-rx-nxp"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <state key="normal" title="保存模板">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZM8-Hj-fhS">
+                    <rect key="frame" x="0.0" y="85" width="350" height="140"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="140" id="v1o-Hz-hoG"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5H-6f-qIj">
+                    <rect key="frame" x="5" y="0.0" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Y5H-6f-qIj" secondAttribute="height" id="HVa-2B-nEy"/>
+                    </constraints>
+                    <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                    <state key="normal" image="close"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEX-Kw-LwA">
+                    <rect key="frame" x="300" y="0.0" width="50" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="yN1-n1-lx4"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="清空"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ZM8-Hj-fhS" secondAttribute="trailing" id="3SL-Ku-F0Q"/>
+                <constraint firstAttribute="trailing" secondItem="sEX-Kw-LwA" secondAttribute="trailing" id="7MX-F5-tTd"/>
+                <constraint firstItem="ZM8-Hj-fhS" firstAttribute="top" secondItem="cSJ-XT-Nt8" secondAttribute="bottom" constant="10" id="8TW-ab-ezY"/>
+                <constraint firstItem="ZM8-Hj-fhS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="E5w-li-MMU"/>
+                <constraint firstItem="L6Z-7R-QuN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="F3v-tu-oaS"/>
+                <constraint firstItem="sEX-Kw-LwA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="GtL-vM-yVJ"/>
+                <constraint firstItem="cSJ-XT-Nt8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="J0c-i1-nu4"/>
+                <constraint firstItem="Y5H-6f-qIj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="TOf-JT-swl"/>
+                <constraint firstAttribute="trailing" secondItem="cSJ-XT-Nt8" secondAttribute="trailing" constant="10" id="WFO-4i-BHm"/>
+                <constraint firstAttribute="bottom" secondItem="L6Z-7R-QuN" secondAttribute="bottom" id="WTG-6A-QO8"/>
+                <constraint firstItem="cSJ-XT-Nt8" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="XwX-cm-qEM"/>
+                <constraint firstAttribute="trailing" secondItem="L6Z-7R-QuN" secondAttribute="trailing" id="c4z-Qs-Ws8"/>
+                <constraint firstItem="cSJ-XT-Nt8" firstAttribute="top" secondItem="sEX-Kw-LwA" secondAttribute="bottom" id="egM-o5-L3o"/>
+                <constraint firstItem="cSJ-XT-Nt8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="nEd-PF-LMT"/>
+                <constraint firstItem="cSJ-XT-Nt8" firstAttribute="top" secondItem="Y5H-6f-qIj" secondAttribute="bottom" id="s37-TC-TQx"/>
+                <constraint firstItem="Y5H-6f-qIj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="tNI-pY-Mrx"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="554" y="426.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="close" width="18" height="18"/>
+    </resources>
+</document>
