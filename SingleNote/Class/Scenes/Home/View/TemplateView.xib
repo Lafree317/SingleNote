@@ -21,6 +21,9 @@
                         <segment title="买家"/>
                         <segment title="物品"/>
                     </segments>
+                    <connections>
+                        <action selector="segementChange:" destination="iN0-l3-epB" eventType="valueChanged" id="SQf-Vh-YYd"/>
+                    </connections>
                 </segmentedControl>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L6Z-7R-QuN">
                     <rect key="frame" x="0.0" y="241" width="350" height="50"/>
@@ -32,6 +35,30 @@
                     <state key="normal" title="保存模板">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="saveAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="t69-VA-zZm"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5H-6f-qIj">
+                    <rect key="frame" x="5" y="0.0" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Y5H-6f-qIj" secondAttribute="height" id="HVa-2B-nEy"/>
+                    </constraints>
+                    <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                    <state key="normal" title="清空"/>
+                    <connections>
+                        <action selector="clearAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="il0-EX-hm2"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEX-Kw-LwA">
+                    <rect key="frame" x="300" y="0.0" width="50" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="yN1-n1-lx4"/>
+                    </constraints>
+                    <state key="normal" image="pushClose"/>
+                    <connections>
+                        <action selector="closeAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="NK0-dj-fhM"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZM8-Hj-fhS">
                     <rect key="frame" x="0.0" y="85" width="350" height="140"/>
@@ -40,24 +67,8 @@
                         <constraint firstAttribute="height" constant="140" id="v1o-Hz-hoG"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5H-6f-qIj">
-                    <rect key="frame" x="5" y="0.0" width="40" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="Y5H-6f-qIj" secondAttribute="height" id="HVa-2B-nEy"/>
-                    </constraints>
-                    <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
-                    <state key="normal" image="pushClose"/>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEX-Kw-LwA">
-                    <rect key="frame" x="300" y="0.0" width="50" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="50" id="yN1-n1-lx4"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="清空"/>
-                </button>
             </subviews>
-            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="ZM8-Hj-fhS" secondAttribute="trailing" id="3SL-Ku-F0Q"/>
                 <constraint firstAttribute="trailing" secondItem="sEX-Kw-LwA" secondAttribute="trailing" id="7MX-F5-tTd"/>
@@ -78,6 +89,9 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="contentView" destination="ZM8-Hj-fhS" id="f4b-Gg-RJf"/>
+            </connections>
             <point key="canvasLocation" x="554" y="426.5"/>
         </view>
     </objects>

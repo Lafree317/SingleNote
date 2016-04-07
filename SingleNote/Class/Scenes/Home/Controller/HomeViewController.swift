@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,NewViewControllerDelegate,NoteCellDelegate,HistoryViewControllerDelegate {
+class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,NewViewControllerDelegate,NoteCellDelegate,HistoryViewControllerDelegate,TemplateViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     var prototypeCell:NoteCell!
@@ -21,12 +21,16 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUI()
+        // Do any additional setup after loading the view.
+    }
+    func setUI(){
         model = HomeModel()
         self.tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refresh))
         self.tableView.mj_header.beginRefreshing()
         self.tableView.registerNib(UINib.init(nibName: "NoteCell", bundle: nil), forCellReuseIdentifier: noteCellId)
         prototypeCell = self.tableView.dequeueReusableCellWithIdentifier(noteCellId) as! NoteCell
-        // Do any additional setup after loading the view.
+        self.view.addSubview(self.templateView)
     }
     func refresh(){
         model.refresh { (success, type) in
@@ -122,11 +126,48 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         // Pass the selected object to the new view controller.
     }
 
-    // 模板懒加载
-    lazy var templateView:TemplateView = {
-        let tempView = TemplateView()
 
-        return tempView
+    // 模板懒加载
+    lazy var templateView:UIView = {
+        
+        let maskView = UIView(frame: self.view.bounds)
+        maskView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.6)
+        maskView.hidden = true
+        maskView.alpha = 1
+        let tempView = NSBundle.mainBundle().loadNibNamed("TemplateView", owner: self, options: nil).first as! TemplateView
+        tempView.delegate = self
+        tempView.layer.masksToBounds = true
+        tempView.layer.cornerRadius = 10
+        tempView.center = maskView.center
+        
+        maskView.addSubview(tempView)
+        
+        return maskView
     }()
-    
+    // 弹出模板页面
+    @IBAction func templateAction(sender: UIButton) {
+        let view = self.templateView.subviews.first
+        view?.center = CGPointMake(-ZEScreenWidth, ZEScreenHight/2)
+        UIView.animateWithDuration(0.5, animations: {
+            
+            
+            self.templateView.hidden = false
+            self.templateView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.8)
+            view?.center = self.view.center
+        }) { (true) in
+            
+        }
+    }
+    // 回收模板页面
+    func templateViewCloseAction() {
+        self.templateView.endEditing(true)
+        let view = self.templateView.subviews.first
+        UIView.animateWithDuration(0.5, animations: {
+            self.templateView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0)
+            view?.center = CGPointMake(ZEScreenWidth*2, ZEScreenHight/2)
+        }) { (true) in
+            self.templateView.hidden = true
+            
+        }
+    }
 }

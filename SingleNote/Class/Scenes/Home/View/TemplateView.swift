@@ -7,15 +7,52 @@
 //
 
 import UIKit
-
+protocol TemplateViewDelegate {
+    func templateViewCloseAction()
+}
 class TemplateView: UIView {
 
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
+    var buyerView:BuyerCell?
+    var itemView:ItemCell?
+    var status = 0
+    @IBOutlet weak var contentView: UIView!
+    var delegate:TemplateViewDelegate?
+ 
+    override func awakeFromNib() {
+        buyerView = NSBundle.mainBundle().loadNibNamed("BuyerCell", owner: self, options: nil).first as? BuyerCell
+        buyerView?.frame = self.contentView.bounds
+        itemView = NSBundle.mainBundle().loadNibNamed("ItemCell", owner: self, options: nil).first as? ItemCell
+        itemView?.frame = self.contentView.bounds
+        self.contentView.addSubview(buyerView!)
     }
-    */
-
+    
+    /** 保存 */
+    @IBAction func saveAction(sender: UIButton) {
+        
+        
+    }
+    /** 关闭 */
+    @IBAction func closeAction(sender: UIButton) {
+        delegate?.templateViewCloseAction()
+        
+    }
+    /** 清空 */
+    @IBAction func clearAction(sender: UIButton) {
+        if status == NoteType.buyer.rawValue{
+            buyerView?.clearString()
+        }else{
+            itemView?.clear()
+        }
+    }
+    /** 改变选项 */
+    @IBAction func segementChange(sender: UISegmentedControl) {
+        status = sender.selectedSegmentIndex
+        if status == NoteType.buyer.rawValue {
+            self.contentView.addSubview(buyerView!)
+            itemView?.removeFromSuperview()
+        }else {
+            self.contentView.addSubview(itemView!)
+            buyerView?.removeFromSuperview()
+        }
+    }
 }
