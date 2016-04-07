@@ -15,8 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-
-        AVOSCloud.setApplicationId("HjHrRbC4HUuWIGgWWp5bDspr-gzGzoHsz", clientKey: "HVPC0YqHvFztwdWlxYu0nOQg")
+        // 正式
+//        AVOSCloud.setApplicationId("HjHrRbC4HUuWIGgWWp5bDspr-gzGzoHsz", clientKey: "HVPC0YqHvFztwdWlxYu0nOQg")
+        // 测试
+        AVOSCloud.setApplicationId("MgoAgfkkjEfIFWMKopcbp511-gzGzoHsz", clientKey: "wIyd4W8Mqi4XjroS2uuRJ8CY")
         IQKeyboardManager.sharedManager().enable = true
         // Override point for customization after application launch.
         return true
